@@ -9,6 +9,7 @@
 
 using namespace std;
 
+
 namespace Project2 {
 
 	using namespace System;
@@ -17,6 +18,7 @@ namespace Project2 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+
 
 	/// <summary>
 	/// Summary for MyForm
@@ -48,7 +50,7 @@ namespace Project2 {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Diagnostics::PerformanceCounter^ performanceCounter1;
 	private: System::Windows::Forms::RichTextBox^ richTextBox1;
-	private: System::Windows::Forms::RichTextBox^ richTextBox2;
+
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
 	protected:
@@ -71,7 +73,6 @@ namespace Project2 {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->performanceCounter1 = (gcnew System::Diagnostics::PerformanceCounter());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
-			this->richTextBox2 = (gcnew System::Windows::Forms::RichTextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->performanceCounter1))->BeginInit();
@@ -115,26 +116,16 @@ namespace Project2 {
 			// 
 			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->richTextBox1->Location = System::Drawing::Point(66, 192);
+			this->richTextBox1->Location = System::Drawing::Point(62, 271);
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->Size = System::Drawing::Size(314, 36);
 			this->richTextBox1->TabIndex = 3;
 			this->richTextBox1->Text = L"";
 			// 
-			// richTextBox2
-			// 
-			this->richTextBox2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->richTextBox2->Location = System::Drawing::Point(66, 279);
-			this->richTextBox2->Name = L"richTextBox2";
-			this->richTextBox2->Size = System::Drawing::Size(314, 36);
-			this->richTextBox2->TabIndex = 4;
-			this->richTextBox2->Text = L"";
-			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(70, 164);
+			this->label2->Location = System::Drawing::Point(66, 243);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(56, 13);
 			this->label2->TabIndex = 5;
@@ -143,7 +134,7 @@ namespace Project2 {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(70, 254);
+			this->label3->Location = System::Drawing::Point(172, 243);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(56, 13);
 			this->label3->TabIndex = 6;
@@ -156,7 +147,6 @@ namespace Project2 {
 			this->ClientSize = System::Drawing::Size(447, 649);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
-			this->Controls->Add(this->richTextBox2);
 			this->Controls->Add(this->richTextBox1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button2);
@@ -169,46 +159,51 @@ namespace Project2 {
 			this->PerformLayout();
 
 		}
+
+
 #pragma endregion
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 
-
-
-	}
-
-	public: System::Int32 RandomNum(int a, int b) {
-		return rand() % a + b + 1;
 	}
 
 
-	public: System::Int32 Nums(int a, int b) {
+	public: System::Int32 Add(int a, int b) {
 		return a + b;
-	};
+	}
 
-	public: void n(){
+	public: System::Int32 Sub(int a, int b) {
+		return a - b;
+	}
+
+	public: System::Int32 Multiply(int a, int b) {
+		return Math::Abs(a * b);
+	}
+
+	public: System::Double Div(double a, double b) {
+		return b / a;
+	}
+
+	public:	std::string Operator() {
+
+		string op[] = { "+", "-", "*" };
+
+		int result = rand() % 2 + 1;
+		string n = op[result];
+		return n.c_str();
+	}
 
 
-		int Number_1 = Convert::ToInt64(RandomNum(1, 10));
-		int Number_2 = Convert::ToInt64(RandomNum(2, 10));
-
-
-		string op[4] = { "+", "-", "*", "/" };
-
-		//int randomOp = System::Convert::ToInt32(;
-
+	public: System::Int32 RandomNum() {
 
 		srand(time(0));
-
-		int randomOp = rand() % + 3 + 1;
-	
-		std::string ops = op[randomOp];
-
-		label1->Text = gcnew System::String(ops.c_str());
-		label2->Text = gcnew System::String(Number_1.ToString());
-		label3->Text = gcnew System::String(Number_2.ToString());
-
+		return rand() % 10 + 1;
 	};
- 
+
+
+	  int Number_1 = Convert::ToInt64(RandomNum());
+	  int Number_2 = Convert::ToInt64(RandomNum());
+
+
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		static bool isReady = false;
 
@@ -216,15 +211,49 @@ namespace Project2 {
 
 			int a = 5;
 
-			if (sizeof(a) > 0) {
+			//int randomOp = System::Convert::ToInt32(;
+
+
+			srand(time(0));
+
+			if (a > 0) {
 
 				button1->BackColor = System::Drawing::Color::Black;
 				button1->ForeColor = System::Drawing::Color::White;
 				button1->Text = "Already Generated";
 
+				string ops = Operator();
+
+				bool isReady = false;
+
+				while (!isReady) {
+
+					if (ops == "+") {
+						label1->Text = "What is: " + Number_1
+							+ " + " + Number_2;
 
 
 
+						break;
+					}
+					
+					if (ops == "-") {
+						label1->Text = "What is: " + Number_1 
+							+ " - " + Number_2;
+						
+						break;
+					}
+					
+					if (ops == "*") {
+						label1->Text = "What is: " + Number_1
+							+ " * " + Number_2;
+						break;
+					}
+
+
+
+					isReady = true;
+				}
 			}
 
 
@@ -235,29 +264,41 @@ namespace Project2 {
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 
-
-
 		static bool isReady = false;
 
 		if (!isReady) {
 
-			int a = 5;
 
-			if (sizeof(a) > 0) {
+			int paedNumberText = System::Int32::Parse(richTextBox1->Text);
 
-				button2->BackColor = System::Drawing::Color::Black;
-				button2->ForeColor = System::Drawing::Color::White;
-				button2->Text = "Answer is Correct";
-
-				n();
+			button2->BackColor = System::Drawing::Color::Black;
+			button2->ForeColor = System::Drawing::Color::White;
 
 
+			if (paedNumberText.Equals(Add(Number_1, Number_2))) {
+
+				label1->Text = "Correct";
+				label2->Text = "Correct";
+
+			}
+
+			if (paedNumberText.Equals(Sub(Number_1, Number_2))) {
+
+				label1->Text = "Correct";
+				label2->Text = "Correct";
+
+			};
+
+			if (paedNumberText.Equals(Multiply(Number_1, Number_2))) {
+
+				label1->Text = "Correct";
+				label2->Text = "Correct";
 
 			}
 
 
-
 		}
+
 
 	}
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) 
